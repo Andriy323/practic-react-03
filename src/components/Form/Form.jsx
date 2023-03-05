@@ -1,5 +1,11 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useMutation, useQueryClient } from 'react-query';
+import { toast } from 'react-hot-toast';
+
+import { addContact } from 'service/contacts.service';
+import { Loader } from 'components/Loader';
+import { KEY } from 'utils/keys';
 
 import styles from './Form.module.css';
 
@@ -10,12 +16,22 @@ export const Form = () => {
     reset,
     formState: { errors },
   } = useForm();
+  const queryClient = useQueryClient();
+  const mutation = useMutation(KEY.ADD_CONTACT, addContact, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(KEY.GET_CONTACTS);
+    },
+  });
 
-  const handleFormSubmit = value => {
-    console.log(value);
+  const handleFormSubmit = async contact => {
+    mutation.mutate(contact);
 
     reset();
   };
+
+  if (mutation.isSuccess) {
+    toast.success('Contacts added successfully!');
+  }
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(handleFormSubmit)}>
@@ -82,8 +98,12 @@ export const Form = () => {
       </div>
 
       <div className={styles.labelWrapper}>
-        <button className={styles.button} type="submit">
-          Add contact
+        <button
+          className={styles.button}
+          type="submit"
+          disabled={mutation.isLoading}
+        >
+          {mutation.isLoading ? <Loader /> : 'Add contact'}
         </button>
       </div>
     </form>
