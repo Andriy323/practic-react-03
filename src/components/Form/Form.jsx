@@ -40,7 +40,9 @@ export const Form = () => {
         <label className={styles.label}>
           <span className={styles.labelText}> Name</span>
           <input
-            className={styles.input}
+            className={`${styles.input} ${
+              errors.name ? styles.errorInput : ''
+            }`}
             {...register('name', {
               required: {
                 value: true,
@@ -62,7 +64,9 @@ export const Form = () => {
         <label className={styles.label}>
           <span className={styles.labelText}> Email</span>
           <input
-            className={styles.input}
+            className={`${styles.input} ${
+              errors.name ? styles.errorInput : ''
+            }`}
             {...register('email', {
               required: {
                 value: true,
@@ -82,7 +86,9 @@ export const Form = () => {
         <label className={styles.label}>
           <span className={styles.labelText}> Number</span>
           <input
-            className={styles.input}
+            className={`${styles.input} ${
+              errors.name ? styles.errorInput : ''
+            }`}
             {...register('number', {
               required: {
                 value: true,

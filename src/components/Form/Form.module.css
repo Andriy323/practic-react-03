@@ -39,6 +39,10 @@
   box-shadow: var(--box-shadow-md);
 }
 
+.errorInput {
+  border-color: var(--error-color);
+}
+
 .button {
   width: 100%;
   min-height: 48px;
