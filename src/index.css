@@ -3,6 +3,7 @@
 :root {
   --accent-color: #5469d4;
   --accent-hover: #a5b4fc;
+  --error-color: #f43f5e;
   --light: #f8fafc;
   --dark: #374151;
   --box-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1),
