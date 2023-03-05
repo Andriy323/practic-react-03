@@ -1,14 +1,26 @@
 import { useState, useEffect } from 'react';
+import { useQuery } from 'react-query';
+
 import { getContacts } from 'service/contacts.service';
+import { KEY } from 'utils/keys';
 
 import styles from './App.module.css';
 
 export const App = () => {
-  const [contacts, setContacts] = useState([]);
+  const {
+    isLoading,
+    isError,
+    data: contacts,
+    error,
+  } = useQuery(KEY.CONTACTS, getContacts);
 
-  useEffect(() => {
-    getContacts().then(data => setContacts(data));
-  }, []);
+  if (isLoading) {
+    return <span>Loading...</span>;
+  }
+
+  if (isError) {
+    return <span>Error: {error.message}</span>;
+  }
 
   return (
     <section className={styles.section}>
