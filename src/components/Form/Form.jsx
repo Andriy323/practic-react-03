@@ -24,14 +24,15 @@ export const Form = () => {
   });
 
   const handleFormSubmit = async contact => {
-    mutation.mutate(contact);
+    try {
+      await mutation.mutateAsync(contact);
+      toast.success('Contacts added successfully!');
 
-    reset();
+      reset();
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
-
-  if (mutation.isSuccess) {
-    toast.success('Contacts added successfully!');
-  }
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(handleFormSubmit)}>

@@ -12,7 +12,10 @@ export const getContacts = async () => {
 
 // POST /contacts
 export const addContact = async contact => {
-  const { data } = await axios.post(endpoint, contact);
+  await axios.post(endpoint, contact);
+};
 
-  return data;
+// DELETE /contacts/:id
+export const deleteContact = async id => {
+  await axios.delete(`${endpoint}/${id}`);
 };
