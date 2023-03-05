@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
 
 import { getContacts } from 'service/contacts.service';
 import { KEY } from 'utils/keys';
 
+import { Form } from 'components/Form';
 import styles from './App.module.css';
 
 export const App = () => {
@@ -12,7 +12,7 @@ export const App = () => {
     isError,
     data: contacts,
     error,
-  } = useQuery(KEY.CONTACTS, getContacts);
+  } = useQuery(KEY.GET_CONTACTS, getContacts);
 
   if (isLoading) {
     return <span>Loading...</span>;
@@ -24,13 +24,18 @@ export const App = () => {
 
   return (
     <section className={styles.section}>
-      <div className={styles.container}>
-        <h1>Contacts</h1>
+      <div className={styles.form}>
+        <h2>Form</h2>
+        <Form />
+      </div>
+
+      <div className={styles.contacts}>
+        <h2>Contacts</h2>
 
         <ul
           style={{
             display: 'grid',
-            gridTemplateColumns: '1fr 1fr 1fr',
+            gridTemplateColumns: '1fr 1fr',
             gap: '16px',
           }}
         >

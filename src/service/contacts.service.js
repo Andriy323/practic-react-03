@@ -9,3 +9,10 @@ export const getContacts = async () => {
 
   return data;
 };
+
+// POST /contacts
+export const addContact = async contact => {
+  const { data } = await axios.post(endpoint, contact);
+
+  return data;
+};
